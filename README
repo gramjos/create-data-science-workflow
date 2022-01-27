@@ -1,0 +1,17 @@
+TODO 
+	scrape more data
+	send data to SQL DB
+	preform historical analysis on numbers
+
+
+parse( s )
+	extract the price from the string
+
+get_link_price( l )
+	l constains the constructed the attribute values
+	the 'a' or anchor tag has an href attribute of the value...
+		'comparison/bitcoin-price.html'
+	content.find_all() 
+		find all the HTML element with the same name and attributes
+		log the raw text between the tags > ...raw text... <
+
