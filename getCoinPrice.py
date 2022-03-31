@@ -6,7 +6,7 @@
 
 def parse ( s ) :
     # '1 ETH = 2,431.86 USD'
-    m= search(r'1\s([A-Z]{2,4})\s=\s(([0-9]|,|\.)*)', s )
+    m= search(r'1\s([A-Z]{2,3})\s=\s(([0-9]|,|\.)*)', s )
     # returns a stringified int
     return m.group(2)
 
@@ -30,11 +30,9 @@ def get_link_price(l, content):
 def log_data ( data, warehouse='GetCoinPrice_Log.csv') :
     # display the data being logged and its standard
     #p_print(data)   
-    #print(data)   
-    data.append( datetime.now() )
+    #print(data)   data.append( datetime.now() )
     with open ( warehouse, 'a' ) as log_fd :
         for i in data: 
-            print(type(i))
             if type(i) != str :
                 time_stamp= i.strftime("%x %X")
                 log_fd.write( time_stamp )
@@ -45,7 +43,7 @@ def log_data ( data, warehouse='GetCoinPrice_Log.csv') :
 
 if __name__ == "__main__":
 
-    import requests
+    import requests 
     from bs4 import BeautifulSoup
     from re import search 
     from datetime import datetime
@@ -53,6 +51,8 @@ if __name__ == "__main__":
     # preparing to make url
     which_crypts= ['ethereum','bitcoin', 'litecoin','zcash','monero']
 
+    # piece together the 'a' tag's attribute (href) value 
+        # comparison/zcash-price.html
     front,back= "comparison/","-price.html"
 
     # request object from HTTP request. r holds raw content
