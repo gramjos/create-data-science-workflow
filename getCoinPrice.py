@@ -6,7 +6,7 @@
 
 def parse ( s ) :
     # '1 ETH = 2,431.86 USD'
-    m= search(r'1\s([A-Z]{2,3})\s=\s(([0-9]|,|\.)*)', s )
+    m= search(r'1\s([A-Z]{3})\s=\s(([0-9]|,|\.)*)', s )
     # returns a stringified int
     return m.group(2)
 
