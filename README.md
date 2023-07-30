@@ -1,25 +1,29 @@
-TODO 
-	send data to SQL DB as well
-	preform historical analysis on numbers
+### TODOs
+- send data to SQL DB as well
+- preform historical analysis on numbers(N day moving average)
 
 ### Function Descriptions from getCoinPrice.py
+```python
 parse( s )
-	extract the price from the string
-	given pattern '1\s([A-Z]{3})\s=\s(([0-9]|,|\.)*)'
-	matches
-	  the number one
-	  exactly 3 capitalized chars as capture group 1
-	  <space>
-	  the equal sign
-	  <space>
-	  "take as many digits, commas, and dot"
+```
+- extract the price from the string
+- given pattern '1\s([A-Z]{3})\s=\s(([0-9]|,|\.)*)'
+- matches: 
+  - the number one
+  - exactly 3 capitalized chars as capture group 1
+  - " " (space) (\s is the whitespace meta character)
+  - the equal sign
+  - " " (space)
+  - "take as many digits, commas, and dot"
 
-get_link_price( l )
-	l contains the constructed the attribute values
-	the 'a' or anchor tag has an href attribute of the value...
+```python
+get_link_price( link, content )
+```
+- link contains the constructed the attribute values
+- the 'a' or anchor tag has an href attribute of the value...
 		'comparison/bitcoin-price.html'
-	content.find_all() 
-		find all the HTML element with the same name and attributes
+- content.find_all() 
+  - find all the HTML element with the same name and attributes
 		log the raw text between the tags > ...raw text... <
 
 ---
@@ -30,6 +34,8 @@ get_link_price( l )
 ---
 #### launchctl notes
 https://launchd.info/
+
+```shell
 $ launchctl load CryptoStream.plist
 
 $ launchctl start CryptoStream.plist
@@ -51,5 +57,6 @@ $ launchctl list CryptoStream
 		"/Users/g_joss/Documents/Computation/getCoinPrice/getCoinPrice.py";
 	);
 };
+```
 ---
 
