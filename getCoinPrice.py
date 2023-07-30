@@ -19,10 +19,12 @@ def get_link_price(links, content):
     log_data ( to_Log )
 
 def log_data ( data, warehouse='GetCoinPrice_Log.csv') :
+    warehouse="/Users/g_joss/Computation/getCoinPrice/"+warehouse
     with open ( warehouse, 'a' ) as log_fd :
         new_data=''
-        for i in data: 
-            new_data+=( i+'| ' )
+        for value in data: 
+            value=value.replace(",","")
+            new_data+=( value+' | ' )
         t_stamped=str(datetime.now())
         ret=new_data+t_stamped+'\n'
         log_fd.write(ret)
