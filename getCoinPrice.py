@@ -10,36 +10,22 @@ def parse ( s ) :
     # returns a stringified int
     return m.group(2)
 
-def get_link_price(l, content):
-
-    a_tag = 'a'
-    cv2= {'href':[]}
-
+def get_link_price(links, content):
     to_Log= list()
-
-    for i in l:
-        cv2['href']=i
-        re = content.find_all(name= a_tag, attrs= cv2)
+    for link in links:
+        re = content.find_all(name= 'a', attrs= {'href':[link]})
         print(re[0].text)
         to_Log.append( parse( re[0].text ))
     log_data ( to_Log )
 
-# Historical Analysis
-# raw at GetCoinPrice_Log.csv
-
 def log_data ( data, warehouse='GetCoinPrice_Log.csv') :
-    # display the data being logged and its standard
-    #p_print(data)   
-    #print(data)   data.append( datetime.now() )
     with open ( warehouse, 'a' ) as log_fd :
+        new_data=''
         for i in data: 
-            if type(i) != str :
-                time_stamp= i.strftime("%x %X")
-                log_fd.write( time_stamp )
-                
-            else :
-                log_fd.write( i+'| ' )
-        log_fd.write("\n")
+            new_data+=( i+'| ' )
+        t_stamped=str(datetime.now())
+        ret=new_data+t_stamped+'\n'
+        log_fd.write(ret)
 
 if __name__ == "__main__":
 
@@ -52,15 +38,18 @@ if __name__ == "__main__":
     which_crypts= ['ethereum','bitcoin', 'litecoin','zcash','monero']
 
     # piece together the 'a' tag's attribute (href) value 
+        # front {which_crypts[i]} back
         # comparison/zcash-price.html
     front,back= "comparison/","-price.html"
 
     # request object from HTTP request. r holds raw content
     r= requests.get('https://bitinfocharts.com')
 
+    # scraped content reformat
     content= BeautifulSoup(r.content,features="lxml")
 
     href_link= [ front+i+back for i in which_crypts ]
+
     get_link_price(href_link, content)
 
 

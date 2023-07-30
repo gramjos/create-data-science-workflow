@@ -4,7 +4,6 @@ TODO
 	preform historical analysis on numbers
 	regex in fx parse does follow propper math notation
 
-
 parse( s )
 	extract the price from the string
 	given pattern '1\s([A-Z]{3})\s=\s(([0-9]|,|\.)*)'
@@ -24,3 +23,7 @@ get_link_price( l )
 		find all the HTML element with the same name and attributes
 		log the raw text between the tags > ...raw text... <
 
+---
+Scheduled Tasks:
+- call coinz
+- push coinz log
